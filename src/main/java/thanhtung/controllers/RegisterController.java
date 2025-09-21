@@ -3,7 +3,6 @@ package thanhtung.controllers;
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,7 +12,6 @@ import thanhtung.models.UserModel;
 import thanhtung.services.UserServices;
 import thanhtung.services.impl.UserServiceImpl;
 
-@WebServlet(urlPatterns = { "/register" })
 public class RegisterController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -26,7 +24,6 @@ public class RegisterController extends HttpServlet {
             return;
         }
 
-        // Check cookie
         Cookie[] cookies = req.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
@@ -43,7 +40,6 @@ public class RegisterController extends HttpServlet {
             }
         }
         
-        // Sửa đường dẫn JSP để phù hợp với thư mục views/admin
         req.getRequestDispatcher("/views/admin/register.jsp").forward(req, resp);
     }
 
@@ -58,11 +54,8 @@ public class RegisterController extends HttpServlet {
         String phone = req.getParameter("phone");
 
         String alertMsg = "";
-        if (username == null || username.trim().isEmpty() || 
-            password == null || password.trim().isEmpty() || 
-            email == null || email.trim().isEmpty() || 
-            fullname == null || fullname.trim().isEmpty() || 
-            phone == null || phone.trim().isEmpty()) {
+        if (username == null || username.trim().isEmpty() || password == null || password.trim().isEmpty() || 
+            email == null || email.trim().isEmpty() || fullname == null || fullname.trim().isEmpty() || phone == null || phone.trim().isEmpty()) {
             alertMsg = "Không được để trống các trường!";
             req.setAttribute("alert", alertMsg);
             req.getRequestDispatcher("/views/admin/register.jsp").forward(req, resp);
@@ -92,12 +85,9 @@ public class RegisterController extends HttpServlet {
 
         boolean isSuccess = service.register(email, password, username, fullname, phone);
         if (isSuccess) {
-            alertMsg = "Đăng ký thành công! Vui lòng đăng nhập.";
-            req.setAttribute("success", alertMsg);
-            // Redirect đến login thay vì forward để tránh resubmit form
-            resp.sendRedirect(req.getContextPath() + "/login?success=true");
+            resp.sendRedirect(req.getContextPath() + "/login?success=Đăng ký thành công!");
         } else {
-            alertMsg = "Lỗi hệ thống! Vui lòng thử lại.";
+            alertMsg = "Lỗi hệ thống!";
             req.setAttribute("alert", alertMsg);
             req.getRequestDispatcher("/views/admin/register.jsp").forward(req, resp);
         }
