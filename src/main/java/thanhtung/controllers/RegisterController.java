@@ -40,7 +40,7 @@ public class RegisterController extends HttpServlet {
             }
         }
         
-        req.getRequestDispatcher("/views/admin/register.jsp").forward(req, resp);
+        req.getRequestDispatcher("/views/register.jsp").forward(req, resp);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class RegisterController extends HttpServlet {
             email == null || email.trim().isEmpty() || fullname == null || fullname.trim().isEmpty() || phone == null || phone.trim().isEmpty()) {
             alertMsg = "Không được để trống các trường!";
             req.setAttribute("alert", alertMsg);
-            req.getRequestDispatcher("/views/admin/register.jsp").forward(req, resp);
+            req.getRequestDispatcher("/views/register.jsp").forward(req, resp);
             return;
         }
 
@@ -67,19 +67,19 @@ public class RegisterController extends HttpServlet {
         if (service.checkExistEmail(email)) {
             alertMsg = "Email đã tồn tại!";
             req.setAttribute("alert", alertMsg);
-            req.getRequestDispatcher("/views/admin/register.jsp").forward(req, resp);
+            req.getRequestDispatcher("/views/register.jsp").forward(req, resp);
             return;
         }
         if (service.checkExistUsername(username)) {
             alertMsg = "Tài khoản đã tồn tại!";
             req.setAttribute("alert", alertMsg);
-            req.getRequestDispatcher("/views/admin/register.jsp").forward(req, resp);
+            req.getRequestDispatcher("/views/register.jsp").forward(req, resp);
             return;
         }
         if (service.checkExistPhone(phone)) {
             alertMsg = "Số điện thoại đã tồn tại!";
             req.setAttribute("alert", alertMsg);
-            req.getRequestDispatcher("/views/admin/register.jsp").forward(req, resp);
+            req.getRequestDispatcher("/views/register.jsp").forward(req, resp);
             return;
         }
 
@@ -89,7 +89,7 @@ public class RegisterController extends HttpServlet {
         } else {
             alertMsg = "Lỗi hệ thống!";
             req.setAttribute("alert", alertMsg);
-            req.getRequestDispatcher("/views/admin/register.jsp").forward(req, resp);
+            req.getRequestDispatcher("/views/register.jsp").forward(req, resp);
         }
     }
 }

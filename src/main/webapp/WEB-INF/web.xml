@@ -1,78 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee 
-	https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
-	version="6.0">
-
-	<display-name>bt25082025</display-name>
-	
-	<!-- Welcome files -->
-	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>Home.jsp</welcome-file>
-	</welcome-file-list>
-
-	<!-- Servlet mappings -->
-	
-	<!-- HomeController (cho user thường) -->
-	<servlet>
-		<servlet-name>HomeController</servlet-name>
-		<servlet-class>thanhtung.controllers.HomeController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>HomeController</servlet-name>
-		<url-pattern>/home</url-pattern>
-	</servlet-mapping>
-
-	<!-- LoginController -->
-	<servlet>
-		<servlet-name>LoginController</servlet-name>
-		<servlet-class>thanhtung.controllers.LoginController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>LoginController</servlet-name>
-		<url-pattern>/login</url-pattern>
-	</servlet-mapping>
-
-	<!-- RegisterController -->
-	<servlet>
-		<servlet-name>RegisterController</servlet-name>
-		<servlet-class>thanhtung.controllers.RegisterController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>RegisterController</servlet-name>
-		<url-pattern>/register</url-pattern>
-	</servlet-mapping>
-
-	<!-- WaitingController -->
-	<servlet>
-		<servlet-name>WaitingController</servlet-name>
-		<servlet-class>thanhtung.controllers.WaitingController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>WaitingController</servlet-name>
-		<url-pattern>/waiting</url-pattern>
-	</servlet-mapping>
-
-	<!-- LogoutController -->
-	<servlet>
-		<servlet-name>LogoutController</servlet-name>
-		<servlet-class>thanhtung.controllers.LogoutController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>LogoutController</servlet-name>
-		<url-pattern>/logout</url-pattern>
-	</servlet-mapping>
-
-	<!-- Admin HomeController -->
-	<servlet>
-		<servlet-name>AdminHomeController</servlet-name>
-		<servlet-class>thanhtung.controllers.admin.HomeController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>AdminHomeController</servlet-name>
-		<url-pattern>/admin/home</url-pattern>
-	</servlet-mapping>
-
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" version="6.0">
+  <display-name>bt25082025</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>Home.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>HomeController</servlet-name>
+    <servlet-class>thanhtung.controllers.HomeController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HomeController</servlet-name>
+    <url-pattern>/home</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LoginController</servlet-name>
+    <servlet-class>thanhtung.controllers.LoginController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginController</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RegisterController</servlet-name>
+    <servlet-class>thanhtung.controllers.RegisterController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegisterController</servlet-name>
+    <url-pattern>/register</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>WaitingController</servlet-name>
+    <servlet-class>thanhtung.controllers.WaitingController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WaitingController</servlet-name>
+    <url-pattern>/waiting</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LogoutController</servlet-name>
+    <servlet-class>thanhtung.controllers.LogoutController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutController</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AdminHomeController</servlet-name>
+    <servlet-class>thanhtung.controllers.admin.HomeController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminHomeController</servlet-name>
+    <url-pattern>/admin/home</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CategoryController</display-name>
+    <servlet-name>CategoryController</servlet-name>
+    <servlet-class>thanhtung.controllers.CategoryController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CategoryController</servlet-name>
+    <url-pattern>/CategoryController</url-pattern>
+  </servlet-mapping>
 </web-app>

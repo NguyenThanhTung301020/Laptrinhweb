@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+	version="6.0">
+
+	<display-name>bt25082025</display-name>
+	
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- Các servlet hiện có... -->
+	
+	<!-- CategoryController -->
+	<servlet>
+		<servlet-name>CategoryController</servlet-name>
+		<servlet-class>thanhtung.controllers.CategoryController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CategoryController</servlet-name>
+		<url-pattern>/category</url-pattern>
+	</servlet-mapping>
+
+</web-app> <!-- ← THÊM DÒNG NÀY -->
