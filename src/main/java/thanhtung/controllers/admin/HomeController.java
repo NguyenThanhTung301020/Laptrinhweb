@@ -14,11 +14,11 @@ public class HomeController extends HttpServlet {  // ← XÓA @WebServlet
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Check session để tránh access trực tiếp
-        if (req.getSession().getAttribute("account") == null) {
-            resp.sendRedirect(req.getContextPath() + "/login");
-            return;
-        }
+        // Tạm comment để test layout mà không login
+        // if (req.getSession().getAttribute("account") == null) {
+        //     resp.sendRedirect(req.getContextPath() + "/login");
+        //     return;
+        // }
         
         req.setAttribute("pageTitle", "Admin Dashboard");
         req.setAttribute("currentPage", "admin-home");

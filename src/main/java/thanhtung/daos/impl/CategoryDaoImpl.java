@@ -3,6 +3,7 @@ package thanhtung.daos.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,18 +13,15 @@ import thanhtung.models.CategoryModel;
 
 public class CategoryDaoImpl implements CategoryDao {
 
-    public Connection conn = null;
-    public PreparedStatement ps = null;
-    public ResultSet rs = null;
+    SQLConnect db = new SQLConnect();
 
     @Override
     public List<CategoryModel> getAllCategories() {
-        List<CategoryModel> categories = new ArrayList<>();
-        String sql = "SELECT * FROM [Category] ORDER BY id DESC";
-        try {
-            conn = new SQLConnect().getConnectionW();
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
+        List<CategoryModel> list = new ArrayList<CategoryModel>();
+        String sql = "SELECT * FROM dbo.Category";
+        try (Connection con = db.getConnectionW();  // Sử dụng Windows Auth
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 CategoryModel category = new CategoryModel();
                 category.setId(rs.getInt("id"));
@@ -31,81 +29,57 @@ public class CategoryDaoImpl implements CategoryDao {
                 category.setDescription(rs.getString("description"));
                 category.setImage(rs.getString("image"));
                 category.setCreatedDate(rs.getDate("createdDate"));
-                categories.add(category);
+                list.add(category);
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (ps != null) ps.close();
-                if (conn != null) conn.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
-        return categories;
+        return list;
     }
 
     @Override
     public CategoryModel getCategoryById(int id) {
-        String sql = "SELECT * FROM [Category] WHERE id = ?";
-        try {
-            conn = new SQLConnect().getConnectionW();
-            ps = conn.prepareStatement(sql);
+        String sql = "SELECT * FROM dbo.Category WHERE id = ?";
+        try (Connection con = db.getConnectionW();  // Sử dụng Windows Auth
+             PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, id);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                CategoryModel category = new CategoryModel();
-                category.setId(rs.getInt("id"));
-                category.setName(rs.getString("name"));
-                category.setDescription(rs.getString("description"));
-                category.setImage(rs.getString("image"));
-                category.setCreatedDate(rs.getDate("createdDate"));
-                return category;
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    CategoryModel category = new CategoryModel();
+                    category.setId(rs.getInt("id"));
+                    category.setName(rs.getString("name"));
+                    category.setDescription(rs.getString("description"));
+                    category.setImage(rs.getString("image"));
+                    category.setCreatedDate(rs.getDate("createdDate"));
+                    return category;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (ps != null) ps.close();
-                if (conn != null) conn.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
         return null;
     }
 
     @Override
     public void addCategory(CategoryModel category) {
-        String sql = "INSERT INTO [Category] (name, description, image) VALUES (?,?,?)";
-        try {
-            conn = new SQLConnect().getConnectionW();
-            ps = conn.prepareStatement(sql);
+        String sql = "INSERT INTO dbo.Category (name, description, image, createdDate) VALUES (?, ?, ?, ?)";
+        try (Connection con = db.getConnectionW();  // Sử dụng Windows Auth
+             PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, category.getName());
             ps.setString(2, category.getDescription());
             ps.setString(3, category.getImage());
+            ps.setDate(4, category.getCreatedDate());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (ps != null) ps.close();
-                if (conn != null) conn.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
 
     @Override
     public void updateCategory(CategoryModel category) {
-        String sql = "UPDATE [Category] SET name = ?, description = ?, image = ? WHERE id = ?";
-        try {
-            conn = new SQLConnect().getConnectionW();
-            ps = conn.prepareStatement(sql);
+        String sql = "UPDATE dbo.Category SET name = ?, description = ?, image = ? WHERE id = ?";
+        try (Connection con = db.getConnectionW();  // Sử dụng Windows Auth
+             PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, category.getName());
             ps.setString(2, category.getDescription());
             ps.setString(3, category.getImage());
@@ -113,33 +87,18 @@ public class CategoryDaoImpl implements CategoryDao {
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (ps != null) ps.close();
-                if (conn != null) conn.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
 
     @Override
     public void deleteCategory(int id) {
-        String sql = "DELETE FROM [Category] WHERE id = ?";
-        try {
-            conn = new SQLConnect().getConnectionW();
-            ps = conn.prepareStatement(sql);
+        String sql = "DELETE FROM dbo.Category WHERE id = ?";
+        try (Connection con = db.getConnectionW();  // Sử dụng Windows Auth
+             PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (ps != null) ps.close();
-                if (conn != null) conn.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
 }
